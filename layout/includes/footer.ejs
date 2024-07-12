@@ -1,31 +1,63 @@
 <footer>
-<div class="site-footer">
-  <div class="social-container">
-    <% ['github', 'twitter', 'weibo', 'zhihu', 'facebook'].forEach((item) => { %>
-      <% if (theme.contact[item]) { %>
-        <a aria-label="跳转至<%= item %>" href="<%= theme.contact[item] %>" target="_blank">
-          <i class="icon icon-<%= item %>"></i>
-        </a>
-      <% } %>
-    <% }) %>
-  </div>
-  <% if (theme.bottom_source.enable) { %>
-    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
-  <% } %>
-  <% Object.keys(theme.bottom_link).forEach(function(key) { %>
-  <% if (theme.bottom_link[key].url && theme.bottom_link[key].text) { %>
-    <% if (theme.bottom_source.enable || show_divide) { %>
-     |
-    <% } else {var show_divide = true} %>
-      <a href="<%- url_for(theme.bottom_link[key].url) %>" target="_blank"><%- theme.bottom_link[key].text %></a>
-  <% } %>
-  <% }); %>
-</div>
+    <div class="site-footer">
+        <div class="social-container">
+            <% ['github', 'twitter', 'weibo', 'zhihu', 'facebook'].forEach((item) => { %>
+            <% if (theme.contact[item]) { %>
+            <a aria-label="跳转至<%= item %>" href="<%= theme.contact[item] %>" target="_blank">
+                <i class="icon icon-<%= item %>"></i>
+            </a>
+            <% } %>
+            <% }) %>
+        </div>
+        <% if (theme.bottom_source.enable) { %>
+        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a
+            href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+        <% } %>
+        <% Object.keys(theme.bottom_link).forEach(function(key) { %>
+        <% if (theme.bottom_link[key].url && theme.bottom_link[key].text) { %>
+        <% if (theme.bottom_source.enable || show_divide) { %>
+        |
+        <% } else {var show_divide = true} %>
+        <a href="<%- url_for(theme.bottom_link[key].url) %>" target="_blank"><%- theme.bottom_link[key].text %></a>
+        <% } %>
+        <% }); %>
+    </div>
+    <!-- mermaid -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+    <script>
+        if (window.mermaid) {
+            // 检查用户的首选颜色模式
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            mermaid.initialize({
+                theme: isDarkMode ? 'neutral' : 'base'
+            });
+        }
+    </script>
+    <!-- diagrams -->
+    <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+    <style type="text/css">
+        @media (prefers-color-scheme: dark) {
+            svg {
+                filter: invert(93%) hue-rotate(180deg);
+                background-color: transparent !important;
+            }
+
+            image {
+                filter: invert(100%) hue-rotate(180deg) saturate(1.25);
+            }
+        }
+
+        .mxgraph-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </footer>
 
 
-      </div>
-    </div>
-    <%- partial('includes/scripts', '') %>
-  </body>
+</div>
+</div>
+<%- partial('includes/scripts', '') %>
+</body>
+
 </html>
